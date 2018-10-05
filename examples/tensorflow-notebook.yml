@@ -27,7 +27,7 @@ spec:
         image: tensorflow/tensorflow:1.4.1-gpu-py3
         resources:
           limits:
-            nvidia.com/gpu: 1
+            deepomatic.com/shared-gpu: 1
 
         ports:
         - containerPort: 8888

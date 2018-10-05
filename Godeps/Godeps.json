@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/NVIDIA/k8s-device-plugin",
+	"ImportPath": "github.com/Deepomatic/infinite-gpus-nvidia-k8s-device-plugin",
 	"GoVersion": "go1.10",
 	"GodepVersion": "v80",
 	"Deps": [

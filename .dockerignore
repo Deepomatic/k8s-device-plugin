@@ -2,5 +2,8 @@ Dockerfile
 .git
 Jenkinsfile
 
+docker/
+examples/
+
 **/*~
 **/.#*

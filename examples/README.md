@@ -19,10 +19,10 @@ The list of prerequisites for running GPU enabled Applications:
 * NVIDIA drivers ~= 361.93
 * nvidia-docker version > 2.0 (see how to [install](https://github.com/NVIDIA/nvidia-docker) and it's [prerequisites](https://github.com/nvidia/nvidia-docker/wiki/Installation-\(version-2.0\)#prerequisites))
 * docker configured with nvidia as the [default runtime](https://github.com/NVIDIA/nvidia-docker/wiki/Advanced-topics#default-runtime).
-* Kubernetes version = 1.9
+* Kubernetes version >= 1.10
 * The `DevicePlugins` feature gate enabled
 
-[Quick start guide is available at the root of the repository.](https://github.com/NVIDIA/k8s-device-plugin)
+[Quick start guide is available at the root of the repository.](https://github.com/Deepomatic/infinite-gpus-nvidia-k8s-device-plugin)
 
 # GPU Enabled TensorFlow Jupyter Notebook
 
@@ -30,7 +30,7 @@ The list of prerequisites for running GPU enabled Applications:
 
 You can deploy a TensorFlow Jupyter notebook by running the following command:
 ```shell
-$ kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v1.9/examples/tensorflow-notebook.yml
+$ kubectl create -f https://raw.githubusercontent.com/Deepomatic/infinite-gpus-nvidia-k8s-device-plugin/v1.10/examples/tensorflow-notebook.yml
 ```
 
 This creates a tensorflow deployment with one replicas. You can see if the pods are running by typing the following command:
