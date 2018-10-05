@@ -17,9 +17,10 @@
 ## About this fork
 This fork advertises multiple fake GPU for each real GPU, allowing to share a GPU between multiple pods using the Kubernetes device plugin api.
 
-The goal is to schedule pods on GPUs until the GPU memory is full 9GPU memory bin-packing).
+The goal is to schedule pods on GPUs until the GPU memory is full (GPU memory bin-packing).
 
-For proper scheduling, this device plugin advertises `SharedGPUMemory` as [Kubernetes Extended Resources](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#extended-resources). Since the `SharedGPUMemory` resource is at the Node level (instead of at the Device level), we effectively support only one GPU per node.
+### Roadmap
+For proper scheduling, this device plugin will advertise `SharedGPUMemory` as [Kubernetes Extended Resources](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#extended-resources). Since the `SharedGPUMemory` resource is at the Node level (instead of at the Device level), we effectively support only one GPU per node.
 
 ## About
 
@@ -93,24 +94,24 @@ $ kubectl create -f https://raw.githubusercontent.com/Deepomatic/infinite-gpus-n
 
 ### Running GPU Jobs
 
-NVIDIA GPUs can now be consumed via container level resource requirements using the resource name nvidia.com/gpu:
+NVIDIA GPUs can now be consumed via container level resource requirements using the resource name `deepomatic.com/shared-gpu`:
 ```yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: gpu-pod
+  name: shared-gpu-pod
 spec:
   containers:
     - name: cuda-container
       image: nvidia/cuda:9.0-devel
       resources:
         limits:
-          nvidia.com/gpu: 2 # requesting 2 GPUs
+          deepomatic.com/shared-gpu: 1 # requesting 1 shared GPU
     - name: digits-container
       image: nvidia/digits:6.0
       resources:
         limits:
-          nvidia.com/gpu: 2 # requesting 2 GPUs
+          deepomatic.com/shared-gpu: 1 # requesting 1 shared GPU
 ```
 
 > **WARNING:** *if you don't request GPUs when using the device plugin with NVIDIA images all

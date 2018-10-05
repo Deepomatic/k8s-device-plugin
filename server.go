@@ -17,7 +17,7 @@ import (
 )
 
 const (
-	resourceName              = "nvidia.com/gpu"
+	resourceName              = "deepomatic.com/shared-gpu"
 	serverSock                = pluginapi.DevicePluginPath + "nvidia.sock"
 	envDisableHealthChecks    = "DP_DISABLE_HEALTHCHECKS"
 	envNumberContainersPerGPU = "DP_NUMBER_CONTAINERS_PER_GPU"
