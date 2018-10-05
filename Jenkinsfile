@@ -16,18 +16,19 @@ node {
     def repository = 'infinite-gpus-nvidia-k8s-device-plugin'
 
     def arch = 'amd64'
-    def os = 'ubuntu16.04'
-    def noOSSuffix = true
 
-    // TODO --cache-from latest
-    def image = docker.build("${namespace}/${repository}:${version}-${env.BUILD_ID}-${os}",
-                             "-f docker/${os}/${arch}/Dockerfile .")
+    ['ubuntu16.04', 'centos7'].each { os ->
+        def noOSSuffix = (os == 'ubuntu16.04')
 
-    if (! isPR) {
-        echo "Mainline branch, pushing to repository"
-        image.push("${version}-${os}")
-        if (! noOSSuffix) {
-            image.push("${version}")
+        def image = docker.build("${namespace}/${repository}:${version}-${env.BUILD_ID}-${os}",
+                                 "-f docker/${os}/${arch}/Dockerfile .")
+
+        if (! isPR) {
+            echo "Mainline branch, pushing to repository"
+            image.push("${version}-${os}")
+            if (! noOSSuffix) {
+                image.push("${version}")
+            }
         }
     }
 }
