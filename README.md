@@ -22,6 +22,9 @@ The goal is to schedule pods on GPUs until the GPU memory is full (GPU memory bi
 ### Roadmap
 For proper scheduling, this device plugin will advertise `SharedGPUMemory` as [Kubernetes Extended Resources](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#extended-resources). Since the `SharedGPUMemory` resource is at the Node level (instead of at the Device level), we effectively support only one GPU per node.
 
+### Configuration
+You can control the number of fake GPU device declared by this device plugin by changing the value of the `DP_NUMBER_CONTAINERS_PER_GPU` environment variable in the DaemonSet definition (default: `100`).
+
 ## About
 
 The NVIDIA device plugin for Kubernetes is a Daemonset that allows you to automatically:

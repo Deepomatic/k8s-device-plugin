@@ -22,6 +22,9 @@ spec:
       containers:
       - image: deepomatic/infinite-gpus-nvidia-k8s-device-plugin:1.10
         name: deepomatic-infinite-gpus-nvidia-device-plugin-ctr
+        env:
+          - name: DP_NUMBER_CONTAINERS_PER_GPU
+            value: '100'
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
