@@ -3,27 +3,24 @@ node {
 
     // For PRs Jenkins will give the source branch name
     if (env.CHANGE_BRANCH) {
-        branch = env.CHANGE_BRANCH
         isPR = true
+        // env.BRANCH_NAME=PR-1
+        version = env.BRANCH_NAME
     } else {
-        branch = env.BRANCH_NAME
         isPR = false
+        // env.BRANCH_NAME=deepomatic/v1.10
+        version = env.BRANCH_NAME.split('/')[1].substring(1)
     }
 
-    // env.JOB_NAME=infinite-gpus-nvidia-k8s-device-plugin/deepomatic/v1.10
-    def args = env.JOB_NAME.split('/')
-    def repository = args[0]
     def namespace = 'deepomatic'
-    if (! isPR) {
-        version = args[2].substring(1)
-    }
+    def repository = 'infinite-gpus-nvidia-k8s-device-plugin'
 
     def arch = 'amd64'
     def os = 'ubuntu16.04'
     def noOSSuffix = true
 
     // TODO --cache-from latest
-    def image = docker.build("${namespace}/${repository}:${env.BRANCH_NAME}-${env.BUILD_ID}-${os}",
+    def image = docker.build("${namespace}/${repository}:${version}-${env.BUILD_ID}-${os}",
                              "-f docker/${os}/${arch}/Dockerfile .")
 
     if (! isPR) {
