@@ -1,2 +1,6 @@
 Dockerfile
 .git
+Jenkinsfile
+
+**/*~
+**/.#*
