@@ -1,4 +1,4 @@
-# Fork of NVIDIA device plugin for Kubernetes with support for infinite fake GPUs
+# Fork of the [NVIDIA device plugin for Kubernetes](https://github.com/NVIDIA/k8s-device-plugin) with support for shared GPUs by declaring GPUs multiple times
 
 ## Table of Contents
 
@@ -18,6 +18,13 @@
 This fork advertises multiple fake GPU for each real GPU, allowing to share a GPU between multiple pods using the Kubernetes device plugin api.
 
 The goal is to schedule pods on GPUs until the GPU memory is full (GPU memory bin-packing).
+
+### Limits
+This is a big workaround given the current situation. It has many drawbacks:
+The kubernetes scheduler doesn't know how the underlying real GPUs are shared between the `deepomatic.com/shared-gpu` resources it allocates among Pods.
+
+- there is now way to control/guarantee spreading the pods among real GPUs: the current workaround is to limit to one real GPU per node and to indirectly schedule via other resources such as `memory` (assuming there is a correlation between `memory` and GPU (memory) usage.
+- in the case of multiple real GPUs per node, asking for multiple shared GPUs for one Pod doesn't make sense as there is no guarantee the pod will be allocated shared GPUs from different real GPUs
 
 ### Roadmap
 For proper scheduling, this device plugin will advertise `SharedGPUMemory` as [Kubernetes Extended Resources](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#extended-resources). Since the `SharedGPUMemory` resource is at the Node level (instead of at the Device level), we effectively support only one GPU per node.
@@ -92,7 +99,7 @@ Once you have enabled this option on *all* the GPU nodes you wish to use,
 you can then enable GPU support in your cluster by deploying the following Daemonset:
 
 ```shell
-$ kubectl create -f https://raw.githubusercontent.com/Deepomatic/infinite-gpus-nvidia-k8s-device-plugin/deepomatic/v1.10/deepomatic-infinite-gpus-nvidia-device-plugin.yml
+$ kubectl create -f https://raw.githubusercontent.com/Deepomatic/shared-gpu-nvidia-k8s-device-plugin/deepomatic/v1.10/deepomatic-shared-gpu-nvidia-device-plugin.yml
 ```
 
 ### Running GPU Jobs
@@ -136,30 +143,30 @@ The next sections are focused on building the device plugin and running it.
 ### With Docker
 
 #### Build
-Option 1, pull the prebuilt image from [Docker Hub](https://hub.docker.com/r/deepomatic/infinite-gpus-nvidia-k8s-device-plugin):
+Option 1, pull the prebuilt image from [Docker Hub](https://hub.docker.com/r/deepomatic/shared-gpu-nvidia-k8s-device-plugin):
 ```shell
-$ docker pull deepomatic/infinite-gpus-nvidia-k8s-device-plugin:1.10
+$ docker pull deepomatic/shared-gpu-nvidia-k8s-device-plugin:1.10
 ```
 
 Option 2, build without cloning the repository:
 ```shell
-$ docker build -t deepomatic/infinite-gpus-nvidia-k8s-device-plugin:1.10 https://github.com/deepomatic/infinite-gpus-nvidia-k8s-device-plugin.git#deepomatic/v1.10
+$ docker build -t deepomatic/shared-gpu-nvidia-k8s-device-plugin:1.10 https://github.com/deepomatic/shared-gpu-nvidia-k8s-device-plugin.git#deepomatic/v1.10
 ```
 
 Option 3, if you want to modify the code:
 ```shell
-$ git clone https://github.com/deepomatic/infinite-gpus-nvidia-k8s-device-plugin.git && cd infinite-gpus-nvidia-k8s-device-plugin
-$ docker build -t deepomatic/infinite-gpus-nvidia-k8s-device-plugin:1.10 .
+$ git clone https://github.com/deepomatic/shared-gpu-nvidia-k8s-device-plugin.git && cd shared-gpu-nvidia-k8s-device-plugin
+$ docker build -t deepomatic/shared-gpu-nvidia-k8s-device-plugin:1.10 .
 ```
 
 #### Run locally
 ```shell
-$ docker run --security-opt=no-new-privileges --cap-drop=ALL --network=none -it -v /var/lib/kubelet/device-plugins:/var/lib/kubelet/device-plugins deepomatic/infinite-gpus-nvidia-k8s-device-plugin:1.10
+$ docker run --security-opt=no-new-privileges --cap-drop=ALL --network=none -it -v /var/lib/kubelet/device-plugins:/var/lib/kubelet/device-plugins deepomatic/shared-gpu-nvidia-k8s-device-plugin:1.10
 ```
 
 #### Deploy as Daemon Set:
 ```shell
-$ kubectl create -f deepomatic-infinite-gpus-nvidia-device-plugin.yml
+$ kubectl create -f deepomatic-shared-gpu-nvidia-device-plugin.yml
 ```
 
 ### Without Docker
@@ -187,5 +194,5 @@ $ ./k8s-device-plugin
 
 # Issues and Contributing
 
-* You can report a bug by [filing a new issue](https://github.com/deepomatic/infinite-gpus-nvidia-k8s-device-plugin/issues/new)
+* You can report a bug by [filing a new issue](https://github.com/deepomatic/shared-gpu-nvidia-k8s-device-plugin/issues/new)
 * You can contribute by opening a [pull request](https://help.github.com/articles/using-pull-requests/)

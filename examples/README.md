@@ -22,7 +22,7 @@ The list of prerequisites for running GPU enabled Applications:
 * Kubernetes version >= 1.10
 * The `DevicePlugins` feature gate enabled
 
-[Quick start guide is available at the root of the repository.](https://github.com/Deepomatic/infinite-gpus-nvidia-k8s-device-plugin)
+[Quick start guide is available at the root of the repository.](https://github.com/Deepomatic/shared-gpu-nvidia-k8s-device-plugin)
 
 # GPU Enabled TensorFlow Jupyter Notebook
 
@@ -30,7 +30,7 @@ The list of prerequisites for running GPU enabled Applications:
 
 You can deploy a TensorFlow Jupyter notebook by running the following command:
 ```shell
-$ kubectl create -f https://raw.githubusercontent.com/Deepomatic/infinite-gpus-nvidia-k8s-device-plugin/v1.10/examples/tensorflow-notebook.yml
+$ kubectl create -f https://raw.githubusercontent.com/Deepomatic/shared-gpu-nvidia-k8s-device-plugin/v1.10/examples/tensorflow-notebook.yml
 ```
 
 This creates a tensorflow deployment with one replicas. You can see if the pods are running by typing the following command:

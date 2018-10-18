@@ -19,11 +19,11 @@ ENV CGO_CFLAGS "-I /usr/local/cuda-8.0/include"
 ENV CGO_LDFLAGS "-L /usr/local/cuda-8.0/lib64"
 ENV PATH=$PATH:/usr/local/nvidia/bin:/usr/local/cuda/bin
 
-WORKDIR /go/src/deepomatic-infinite-gpus-nvidia-device-plugin
+WORKDIR /go/src/deepomatic-shared-gpu-nvidia-device-plugin
 COPY . .
 
 RUN export CGO_LDFLAGS_ALLOW='-Wl,--unresolved-symbols=ignore-in-object-files' && \
-    go install -ldflags="-s -w" -v deepomatic-infinite-gpus-nvidia-device-plugin
+    go install -ldflags="-s -w" -v deepomatic-shared-gpu-nvidia-device-plugin
 
 
 FROM debian:stretch-slim
@@ -31,6 +31,6 @@ FROM debian:stretch-slim
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=utility
 
-COPY --from=build /go/bin/deepomatic-infinite-gpus-nvidia-device-plugin /usr/bin/deepomatic-infinite-gpus-nvidia-device-plugin
+COPY --from=build /go/bin/deepomatic-shared-gpu-nvidia-device-plugin /usr/bin/deepomatic-shared-gpu-nvidia-device-plugin
 
-CMD ["deepomatic-infinite-gpus-nvidia-device-plugin"]
+CMD ["deepomatic-shared-gpu-nvidia-device-plugin"]

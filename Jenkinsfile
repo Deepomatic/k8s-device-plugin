@@ -13,7 +13,7 @@ node {
     }
 
     def namespace = 'deepomatic'
-    def repository = 'infinite-gpus-nvidia-k8s-device-plugin'
+    def repository = 'shared-gpu-nvidia-k8s-device-plugin'
 
     def arch = 'amd64'
 

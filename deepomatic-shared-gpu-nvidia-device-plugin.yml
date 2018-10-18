@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
-  name: deepomatic-infinite-gpus-nvidia-device-plugin-daemonset
+  name: deepomatic-shared-gpu-nvidia-device-plugin-daemonset
   namespace: kube-system
 spec:
   template:
@@ -12,7 +12,7 @@ spec:
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ""
       labels:
-        name: deepomatic-infinite-gpus-nvidia-device-plugin-ds
+        name: deepomatic-shared-gpu-nvidia-device-plugin-ds
     spec:
       tolerations:
       # Allow this pod to be rescheduled while the node is in "critical add-ons only" mode.
@@ -20,8 +20,8 @@ spec:
       - key: CriticalAddonsOnly
         operator: Exists
       containers:
-      - image: deepomatic/infinite-gpus-nvidia-k8s-device-plugin:1.10
-        name: deepomatic-infinite-gpus-nvidia-device-plugin-ctr
+      - image: deepomatic/shared-gpu-nvidia-k8s-device-plugin:1.10
+        name: deepomatic-shared-gpu-nvidia-device-plugin-ctr
         env:
           - name: DP_NUMBER_CONTAINERS_PER_GPU
             value: '100'
