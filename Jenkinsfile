@@ -8,8 +8,8 @@ node {
         version = env.BRANCH_NAME
     } else {
         isPR = false
-        // env.BRANCH_NAME=deepomatic/v1.10
-        version = env.BRANCH_NAME.split('/')[1].substring(1)
+        // env.BRANCH_NAME=v1.10
+        version = env.BRANCH_NAME.substring('v'.size())
     }
 
     def namespace = 'deepomatic'
