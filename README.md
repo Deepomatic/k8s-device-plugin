@@ -99,7 +99,7 @@ Once you have enabled this option on *all* the GPU nodes you wish to use,
 you can then enable GPU support in your cluster by deploying the following Daemonset:
 
 ```shell
-$ kubectl create -f https://raw.githubusercontent.com/Deepomatic/shared-gpu-nvidia-k8s-device-plugin/deepomatic/v1.10/deepomatic-shared-gpu-nvidia-device-plugin.yml
+$ kubectl create -f https://raw.githubusercontent.com/Deepomatic/shared-gpu-nvidia-k8s-device-plugin/v1.10/deepomatic-shared-gpu-nvidia-device-plugin.yml
 ```
 
 ### Running GPU Jobs
