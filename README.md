@@ -150,7 +150,7 @@ $ docker pull deepomatic/shared-gpu-nvidia-k8s-device-plugin:1.10
 
 Option 2, build without cloning the repository:
 ```shell
-$ docker build -t deepomatic/shared-gpu-nvidia-k8s-device-plugin:1.10 https://github.com/deepomatic/shared-gpu-nvidia-k8s-device-plugin.git#deepomatic/v1.10
+$ docker build -t deepomatic/shared-gpu-nvidia-k8s-device-plugin:1.10 https://github.com/deepomatic/shared-gpu-nvidia-k8s-device-plugin.git#v1.10
 ```
 
 Option 3, if you want to modify the code:
