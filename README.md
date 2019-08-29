@@ -23,7 +23,7 @@ The goal is to schedule pods on GPUs until the GPU memory is full (GPU memory bi
 This is a big workaround given the current situation. It has many drawbacks:
 The kubernetes scheduler doesn't know how the underlying real GPUs are shared between the `deepomatic.com/shared-gpu` resources it allocates among Pods.
 
-- there is now way to control/guarantee spreading the pods among real GPUs: the current workaround is to limit to one real GPU per node and to indirectly schedule via other resources such as `memory` (assuming there is a correlation between `memory` and GPU (memory) usage.
+- there is no way to control/guarantee spreading the pods among real GPUs: the current workaround is to limit to one real GPU per node and to indirectly schedule via other resources such as `memory` (assuming there is a correlation between `memory` and GPU (memory) usage.
 - in the case of multiple real GPUs per node, asking for multiple shared GPUs for one Pod doesn't make sense as there is no guarantee the pod will be allocated shared GPUs from different real GPUs
 
 ### Roadmap
