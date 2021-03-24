@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: deepomatic-shared-gpu-nvidia-device-plugin-daemonset
-  namespace: gpu-resources
+  namespace: kube-system
 spec:
   selector:
     matchLabels:
