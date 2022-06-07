@@ -1,5 +1,11 @@
 # Fork of the [NVIDIA device plugin for Kubernetes](https://github.com/NVIDIA/k8s-device-plugin) with support for shared GPUs by declaring GPUs multiple times
 
+## This project is deprecated: the upstream NVIDIA device plugin now supports "time-slicing"
+
+Since [v0.12.0](https://github.com/NVIDIA/k8s-device-plugin/releases/tag/v0.12.0), [upstream NVIDIA device plugin for Kubernetes](https://github.com/NVIDIA/k8s-device-plugin) supports [sharing access to one GPU from multiple Pods, the feature is called "time-slicing"](https://github.com/NVIDIA/k8s-device-plugin#shared-access-to-gpus-with-cuda-time-slicing).
+
+This project will thus not be maintained anymore.
+
 ## Table of Contents
 
 - [About this fork](#about-this-fork)
